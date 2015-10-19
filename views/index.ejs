@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -10,10 +11,11 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <!-- Bootstrap JS -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-  <!-- ToEat.ly -->
+  <!-- Other -->
   <link rel="stylesheet" type="text/css" href="/static/css/main.css">
   <script src="/static/js/app.js"></script>
 </head>
+
 <body>
   <div class="jumbotron">
     <span></span>
@@ -21,22 +23,24 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-6 col-xs-offset-3">
-          <div class="input-group">
-            <input type="text" class="form-control" id="inputText" placeholder="Input Field">
-            <span class="input-group-btn">
-              <button class="btn btn-default" id="postSubmit" type="button">Send</button>
-            </span>
-          </div>
-          <hr>
+        <div class="input-group">
+          <form action="" id="newBlogPost">
+            <input type="text" id="inputText" name="text">
+            <button class="btn" type="submit" id="submitBtn">Submit</button>
+          </form>
+        </div>
+        <hr>
         </div>
     </div>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-xs-6 col-xs-offset-3">
-        <span id ="postSection">
-          <p>Hardcoded Test Item</p>
-        </span>
+
+        <% for (i=0;i<posts.length;i++){ %>
+          <p class="list-group-item"><%=posts[i].name %><span class="close" data-id= "<%= posts[i].id%>">x</span><hr></p>
+        <% } %>
+
       </div>
     </div>
   </div>
