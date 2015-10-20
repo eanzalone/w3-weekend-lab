@@ -23,3 +23,7 @@ p {
 hr {
 	border-color: #4D330F;
 }
+
+.list-group-item{
+    background-color: #262626;
+}

@@ -20,13 +20,14 @@ $(document).ready(function(){
 
 $('#newBlogPost').on('submit', function(e){
 	e.preventDefault();
-	var data = $(this);
+	var data = $(this).serialize();
 	console.log(data);
 	$.post('/api/posts', data, function(newPost){
-		console.log(newPost);
-		$('#postSection').prepend('<p>' + blogText + '<span class="close" data-id='+newPost.id+'>x</span></p>');
+		console.log('hi '+newPost);
+		var blogText = newPost.text;
+		$('#postSection').prepend('<p>' + blogText + '<span class="close" data-id='+newPost._id+'>x</span></p>');
 	});
-	$('#newBlogPost').children().val('');
+	//$('#newBlogPost').children().val('');
 });
 
 

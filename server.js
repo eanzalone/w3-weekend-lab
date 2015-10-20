@@ -2,7 +2,9 @@
 var express = require("express"),
     app = express(),
     path = require("path"),
-    bodyParser = require("body-parser");
+    bodyParser = require("body-parser"),
+    db = require("./models");
+
 
 // CONFIG
 // set ejs as view engine
@@ -14,14 +16,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // DATA
 
-var posts = [
-	{id: 0, text: "Hardcoded Object"},
-	{id: 1, text: "Item 2"}
-];
+// var test = "Hardcoded Object";
+// db.Post.create({text: test});
 
 app.get('/', function (req, res) {
-  //res.send('Hello World!');
-  res.render('index');
+  //look for items in the database to populate the page at start
+  db.Post.find({}, function(err, posts){
+    console.log(posts);
+    res.render('index', {posts: posts});
+  });
 });
 
 // Is the data connected?
@@ -31,9 +34,16 @@ app.get('/api/posts', function (req, res){
 });
 
 app.post('/api/posts', function(req, res){
-	var newFood = req.body;
-	console.log(newFood);
+  // req.body is .serialized #newBlogPost
+	var newPost = req.body;
+	console.log(newPost);
+
+  // create new post in Database
+  db.Post.create(newPost, function(err, taco){
+    res.json(taco);
+  });
 });
+
 
 //LISTENING TO A PORT
 var server = app.listen(3000, function () {
